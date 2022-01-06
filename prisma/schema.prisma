@@ -11,34 +11,51 @@ datasource db {
 }
 
 model Seguidores {
-  id            Int   @default(autoincrement()) @id
-  usuario       Usuario[] 
+  id      Int       @id @default(autoincrement())
+  usuario Usuario[]
 }
 
 model Seguindo {
-  id            Int   @default(autoincrement()) @id
-  usuario       Usuario[] 
+  id      Int       @id @default(autoincrement())
+  usuario Usuario[]
+}
+
+model Categoria {
+  id               Int                @id @default(autoincrement())
+  nome             String
+  criado_em        DateTime           @default(now())
+  categoriaDoTweet CategoriaDoTweet[]
+}
+
+model CategoriaDoTweet {
+  tweet        Tweet     @relation(fields: [tweet_id], references: [id])
+  tweet_id     Int
+  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+  categoria_id Int
+
+  @@id([tweet_id, categoria_id])
 }
 
 model Tweet {
-  id              Int       @default(autoincrement()) @id
-  texto           String
-  emoji           String    
-  data_postagem   DateTime  @default(now())
-  curtidas        Int 
-  usuario         Usuario[] 
+  id               Int                @id @default(autoincrement())
+  texto            String
+  emoji            String
+  data_postagem    DateTime           @default(now())
+  curtidas         Int
+  usuario          Usuario[]
+  categoriaDoTweet CategoriaDoTweet[]
 }
 
 model Usuario {
-  id              Int         @default(autoincrement()) @id
-  nome            String      @unique
-  senha           String      @unique
-  imagem          String
-  bio             String 
-  nascimento      DateTime
-  seguidores      Seguidores[]
-  seguindo        Seguindo[]
-  tweet           Tweet[]
-  criado_em       DateTime    @default(now())
-  modificado_em   DateTime    @updatedAt
+  id            Int          @id @default(autoincrement())
+  nome          String       @unique
+  senha         String       @unique
+  imagem        String
+  bio           String
+  nascimento    DateTime
+  seguidores    Seguidores[]
+  seguindo      Seguindo[]
+  tweet         Tweet[]
+  criado_em     DateTime     @default(now())
+  modificado_em DateTime     @updatedAt
 }
