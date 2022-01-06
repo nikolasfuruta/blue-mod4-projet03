@@ -1,27 +1,26 @@
-# Projeto 2
-- 10 pontos
-- Data de entrega: 2 de jan. de 2022 23:59
-## Bem vindos ao PROJETO 02, você e sua dupla neste projeto irão aplicar os conhecimentos de JWT e Swagger vistos nas ultimas aulas.
+# Bem vindos ao PROJETO 03
 
+## você e sua dupla neste projeto irão complementar o projeto 02, adicionando funcionalidades.
 
-## O projeto consiste em criar uma API que servirá para controle do Twitter, onde o usurio postará tweets e terá seguidores.
+### O projeto consiste em criar uma API que servirá para controle do Twitter, onde o usuario postará tweets e terá seguidores, agora adicionaremos camadas de segurança com JWT.
 
-
-
-### Respeitando o diagrama anexado nessa atividade, os alunos devem desenvolver o schema prisma para montar o banco postgres, toda interação das tabelas é one to many.
+### Em relação ao banco agora teremos duas tabelas se relacionando Many to Many de acordo com o diagrama anexado.
  
-### O JWT nesse projeto deve apenas servir de autenticação, ou seja apenas fornecendo um token valido na aplicação.
+### O JWT nesse projeto deve servir para autenticação e autorização ou seja, além do token de acesso é necessário apenas deixar o usuário interagir se o token for válido.
 
+### Em nossos arquivos DTO é necessário que realizemos as validações por meio dos @Decorators.
 
-### Em nossos arquivos DTO é necessario que realizemos as validações por meio dos @Decorators.
-
+### A sua escolha, um endpoint deve ter todos os seus métodos testados através do jest como vimos em aula, deve ser evidenciado na doc qual endpoint foi escolhido.
 
 ### A documentação dos EndPoints desta vez devem ser feitas no README do github + utilizando o Swagger dentro da aplicação.
 
 
+### O projeto deve ser feito o deploy no heroku.
+
 ### Nota:
-- Criaçao das rotas, Usuario, Seguidores, Seguindo, Tweet - 1
+- Criação das rotas, Usuario, Seguidores, Seguindo, Tweet - 1
 - Models e tabelas corretamente representadas - 2
- - DTO, montagem e validação - 2
- - Implementar Autenticação em JWT - 3
- - Swagger + Readme - 2
+- DTO, montagem, validação e Teste - 2
+- Implementar JWT completa - 3
+- Swagger + Readme - 1
+- Deploy Heroku - 1
