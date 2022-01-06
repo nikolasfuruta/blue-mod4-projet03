@@ -20,13 +20,30 @@ model Seguindo {
   usuario Usuario[]
 }
 
+model Categoria {
+  id               Int                @id @default(autoincrement())
+  nome             String
+  criado_em        DateTime           @default(now())
+  categoriaDoTweet CategoriaDoTweet[]
+}
+
+model CategoriaDoTweet {
+  tweet        Tweet     @relation(fields: [tweet_id], references: [id])
+  tweet_id     Int
+  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+  categoria_id Int
+
+  @@id([tweet_id, categoria_id])
+}
+
 model Tweet {
-  id            Int                @id @default(autoincrement())
-  texto         String
-  emoji         String
-  data_postagem DateTime           @default(now())
-  curtidas      Int
-  favorites     FavoritesOnUsers[]
+  id               Int                @id @default(autoincrement())
+  texto            String
+  emoji            String
+  data_postagem    DateTime           @default(now())
+  curtidas         Int
+  categoriaDoTweet CategoriaDoTweet[]
+  favorites        FavoritesOnUsers[]
 }
 
 model FavoritesOnUsers {
