@@ -5,9 +5,10 @@ import { SeguindoModule } from './api/seguindo/seguindo.module';
 import { TweetModule } from './api/tweet/tweet.module';
 import { UsuarioModule } from './api/usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
+import { CategoriaModule } from './api/categoria/categoria.module';
 
 @Module({
-  imports: [SeguidoresModule, SeguindoModule, TweetModule, UsuarioModule, AuthModule],
+  imports: [SeguidoresModule, SeguindoModule, TweetModule, UsuarioModule, AuthModule, CategoriaModule],
   controllers: [],
   providers: [],
 })
