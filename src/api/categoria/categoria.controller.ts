@@ -18,25 +18,25 @@ import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 export class CategoriaController {
   constructor(private readonly categoriaService: CategoriaService) {}
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   create(@Body() createCategoriaDto: CreateCategoriaDto) {
     return this.categoriaService.create(createCategoriaDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   findAll() {
     return this.categoriaService.findAll();
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.categoriaService.findOne(+id);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -45,7 +45,7 @@ export class CategoriaController {
     return this.categoriaService.update(+id, updateCategoriaDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoriaService.remove(+id);

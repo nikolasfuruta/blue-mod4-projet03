@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class TweetController {
   constructor(private readonly tweetService: TweetService) {}
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiOperation({ summary: "CRIAÇÃO DE TWEETS" })
   @ApiBody(
@@ -32,7 +32,7 @@ export class TweetController {
     return this.tweetService.create(createTweetDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiOperation({ summary: 'LISTA TODOS OS TWEETS' })
   @ApiOkResponse({
@@ -53,7 +53,7 @@ export class TweetController {
     return this.tweetService.findAll();
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM TWEET ESPECÍFICO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO TWEET' })
@@ -75,7 +75,7 @@ export class TweetController {
     return this.tweetService.findOne(+id);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO TWEET' })
   @ApiParam({ name: "id", required: true, description: 'ID DO TWEET' })
@@ -106,7 +106,7 @@ export class TweetController {
     return this.tweetService.update(+id, updateTweetDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA UM TWEET ESPECÍFICO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO TWEET' })

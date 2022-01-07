@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class SeguindoController {
   constructor(private readonly seguindoService: SeguindoService) {}
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiOperation({ summary: "CRIAÇÃO DE PARTICIPANTES - SEGUINDO" })
   @ApiBody(
@@ -29,7 +29,7 @@ export class SeguindoController {
     return this.seguindoService.create(createSeguindoDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiOperation({ summary: 'LISTA TODOS OS PARTICIPANTES - SEGUINDO' })
   @ApiOkResponse({
@@ -46,7 +46,7 @@ export class SeguindoController {
     return this.seguindoService.findAll();
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM ÚNICO PARTICIPANTE - SEGUINDO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -64,7 +64,7 @@ export class SeguindoController {
     return this.seguindoService.findOne(+id);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO PARTICIPANTE - SEGUINDO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -91,7 +91,7 @@ export class SeguindoController {
     return this.seguindoService.update(+id, updateSeguindoDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA PARTICIPANTE - SEGUINDO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })

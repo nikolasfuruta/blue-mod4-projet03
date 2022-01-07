@@ -33,7 +33,7 @@ export class UsuarioController {
 
   
   @Get()
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'LISTA TODOS OS USUÁRIO' })
   @ApiOkResponse({
     description: 'EXECUTADO COM SUCESSO',
@@ -58,7 +58,7 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM USUÁRIO ESPECÍFICO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -85,7 +85,7 @@ export class UsuarioController {
     return this.usuarioService.findOne(+id);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO USUÁRIO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -120,7 +120,7 @@ export class UsuarioController {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA UM USUÁRIO' })
   @ApiParam({ name: 'id', required: true, description: 'ID do participante' })

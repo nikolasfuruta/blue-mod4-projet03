@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class SeguidoresController {
   constructor(private readonly seguidoresService: SeguidoresService) {}
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiOperation({ summary: "CRIAÇÃO DE PARTICIPANTES - SEGUIDORES" })
   @ApiBody(
@@ -29,7 +29,7 @@ export class SeguidoresController {
     return this.seguidoresService.create(createSeguidoreDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiOperation({ summary: 'LISTA TODOS OS PARTICIPANTES - SEGUIDORES' })
   @ApiOkResponse({
@@ -46,7 +46,7 @@ export class SeguidoresController {
     return this.seguidoresService.findAll();
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
   @ApiOperation({ summary: 'EXIBE UM ÚNICO PARTICIPANTE - SEGUIDOR' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -64,7 +64,7 @@ export class SeguidoresController {
     return this.seguidoresService.findOne(+id);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Patch('/:id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO PARTICIPANTE - SEGUIDOR' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -91,7 +91,7 @@ export class SeguidoresController {
     return this.seguidoresService.update(+id, updateSeguidoreDto);
   }
 
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
   @ApiOperation({ summary: 'DELETA PARTICIPANTE - SEGUIDOR' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
