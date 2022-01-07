@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete,  } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards,  } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('usuario')
 @Controller('usuario')
@@ -30,7 +31,9 @@ export class UsuarioController {
     return this.usuarioService.create(createUsuarioDto);
   }
 
+  
   @Get()
+  @UseGuards(AuthGuard())
   @ApiOperation({ summary: 'LISTA TODOS OS USUÁRIO' })
   @ApiOkResponse({
     description: 'EXECUTADO COM SUCESSO',
@@ -55,6 +58,7 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
+  @UseGuards(AuthGuard())
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM USUÁRIO ESPECÍFICO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -81,6 +85,7 @@ export class UsuarioController {
     return this.usuarioService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard())
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO USUÁRIO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -115,6 +120,7 @@ export class UsuarioController {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
+  @UseGuards(AuthGuard())
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA UM USUÁRIO' })
   @ApiParam({ name: 'id', required: true, description: 'ID do participante' })

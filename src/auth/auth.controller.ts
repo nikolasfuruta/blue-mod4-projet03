@@ -28,11 +28,11 @@ export class AuthController {
     return this.authService.login(info);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
   @ApiOperation({ summary: 'Verificação do Login' })
   @ApiOkResponse({ schema: { example: 'LOGADO' } })
   @ApiBadRequestResponse({ description: 'NÃO LOGADO' })
-  @UseGuards(AuthGuard())
   async checkLogin() {
     return 'LOGADO';
   }
