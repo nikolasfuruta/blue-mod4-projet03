@@ -1,15 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TweetService } from './tweet.service';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { UpdateTweetDto } from './dto/update-tweet.dto';
 import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('tweet')
 @Controller('tweet')
 export class TweetController {
   constructor(private readonly tweetService: TweetService) {}
 
+  @UseGuards(AuthGuard())
   @Post()
   @ApiOperation({ summary: "CRIAÇÃO DE TWEETS" })
   @ApiBody(
@@ -30,6 +32,7 @@ export class TweetController {
     return this.tweetService.create(createTweetDto);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
   @ApiOperation({ summary: 'LISTA TODOS OS TWEETS' })
   @ApiOkResponse({
@@ -50,6 +53,7 @@ export class TweetController {
     return this.tweetService.findAll();
   }
 
+  @UseGuards(AuthGuard())
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM TWEET ESPECÍFICO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO TWEET' })
@@ -71,6 +75,7 @@ export class TweetController {
     return this.tweetService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard())
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO TWEET' })
   @ApiParam({ name: "id", required: true, description: 'ID DO TWEET' })
@@ -101,6 +106,7 @@ export class TweetController {
     return this.tweetService.update(+id, updateTweetDto);
   }
 
+  @UseGuards(AuthGuard())
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA UM TWEET ESPECÍFICO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO TWEET' })

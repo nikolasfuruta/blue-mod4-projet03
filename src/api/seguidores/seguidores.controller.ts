@@ -1,15 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SeguidoresService } from './seguidores.service';
 import { CreateSeguidoreDto } from './dto/create-seguidore.dto';
 import { UpdateSeguidoreDto } from './dto/update-seguidore.dto';
 import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('seguidores')
 @Controller('seguidores')
 export class SeguidoresController {
   constructor(private readonly seguidoresService: SeguidoresService) {}
 
+  @UseGuards(AuthGuard())
   @Post()
   @ApiOperation({ summary: "CRIAÇÃO DE PARTICIPANTES - SEGUIDORES" })
   @ApiBody(
@@ -27,6 +29,7 @@ export class SeguidoresController {
     return this.seguidoresService.create(createSeguidoreDto);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
   @ApiOperation({ summary: 'LISTA TODOS OS PARTICIPANTES - SEGUIDORES' })
   @ApiOkResponse({
@@ -43,6 +46,7 @@ export class SeguidoresController {
     return this.seguidoresService.findAll();
   }
 
+  @UseGuards(AuthGuard())
   @Get('/:id')
   @ApiOperation({ summary: 'EXIBE UM ÚNICO PARTICIPANTE - SEGUIDOR' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -60,6 +64,7 @@ export class SeguidoresController {
     return this.seguidoresService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard())
   @Patch('/:id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO PARTICIPANTE - SEGUIDOR' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -86,6 +91,7 @@ export class SeguidoresController {
     return this.seguidoresService.update(+id, updateSeguidoreDto);
   }
 
+  @UseGuards(AuthGuard())
   @Delete('/:id')
   @ApiOperation({ summary: 'DELETA PARTICIPANTE - SEGUIDOR' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })

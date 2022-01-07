@@ -1,15 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SeguindoService } from './seguindo.service';
 import { CreateSeguindoDto } from './dto/create-seguindo.dto';
 import { UpdateSeguindoDto } from './dto/update-seguindo.dto';
 import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('seguindo')
 @Controller('seguindo')
 export class SeguindoController {
   constructor(private readonly seguindoService: SeguindoService) {}
 
+  @UseGuards(AuthGuard())
   @Post()
   @ApiOperation({ summary: "CRIAÇÃO DE PARTICIPANTES - SEGUINDO" })
   @ApiBody(
@@ -27,6 +29,7 @@ export class SeguindoController {
     return this.seguindoService.create(createSeguindoDto);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
   @ApiOperation({ summary: 'LISTA TODOS OS PARTICIPANTES - SEGUINDO' })
   @ApiOkResponse({
@@ -43,6 +46,7 @@ export class SeguindoController {
     return this.seguindoService.findAll();
   }
 
+  @UseGuards(AuthGuard())
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM ÚNICO PARTICIPANTE - SEGUINDO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -60,6 +64,7 @@ export class SeguindoController {
     return this.seguindoService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard())
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO PARTICIPANTE - SEGUINDO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
@@ -86,6 +91,7 @@ export class SeguindoController {
     return this.seguindoService.update(+id, updateSeguindoDto);
   }
 
+  @UseGuards(AuthGuard())
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA PARTICIPANTE - SEGUINDO' })
   @ApiParam({ name: "id", required: true, description: 'ID DO PARTICIPANTE' })
