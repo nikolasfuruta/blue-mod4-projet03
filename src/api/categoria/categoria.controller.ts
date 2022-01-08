@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiBody, ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiBody, ApiCreatedResponse, ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
 import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
@@ -44,16 +44,7 @@ export class CategoriaController {
     schema: {
       properties: {
         id: { example: 2 },
-        nome: { example:"sabrina" },
-        senha: { example: "$2b$12$c.J79Hj9pBJScpgt8ffvMOqo5BMRHh0ukrATlSwWimLU3a7Nflzqe" },
-        imagem: { example: "sabrina.jpeg" },
-        bio: { example: "designer" },
-        nascimento: { example: "1996-04-17T03:00:00.000Z" },
-        criado_em: { example: "2021-12-20T04:10:37.244Z" },
-        modificado_em: { example: "2021-12-20T04:10:37.244Z" },
-        seguidores: { example:[] },
-        seguindo: { example:[] },
-        tweet: { example:[] },
+        nome: { example:"HUMOR" },
       }
     }
   })
