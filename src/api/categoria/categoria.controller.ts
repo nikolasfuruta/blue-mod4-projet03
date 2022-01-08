@@ -10,6 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiBody, ApiCreatedResponse, ApiBadRequestResponse } from '@nestjs/swagger';
 import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
@@ -20,12 +21,43 @@ export class CategoriaController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
+  @ApiOperation({ summary: 'CRIAÇÃO DE CATEGORIAS' })
+  @ApiBody({
+    description: 'EXECUTADO COM SUCESSO',
+    schema: {
+      properties: {
+        nome: { example: "HUMOR" }
+      }
+    },
+  })
+  @ApiCreatedResponse({description: 'EXECUTADO COM SUCESSO'})
+  @ApiBadRequestResponse({ description: 'NÃO ADICIONADO' })
   create(@Body() createCategoriaDto: CreateCategoriaDto) {
     return this.categoriaService.create(createCategoriaDto);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
+  @ApiOperation({ summary: 'LISTA TODOS AS CATEGORIAS' })
+  @ApiOkResponse({
+    description: 'EXECUTADO COM SUCESSO',
+    schema: {
+      properties: {
+        id: { example: 2 },
+        nome: { example:"sabrina" },
+        senha: { example: "$2b$12$c.J79Hj9pBJScpgt8ffvMOqo5BMRHh0ukrATlSwWimLU3a7Nflzqe" },
+        imagem: { example: "sabrina.jpeg" },
+        bio: { example: "designer" },
+        nascimento: { example: "1996-04-17T03:00:00.000Z" },
+        criado_em: { example: "2021-12-20T04:10:37.244Z" },
+        modificado_em: { example: "2021-12-20T04:10:37.244Z" },
+        seguidores: { example:[] },
+        seguindo: { example:[] },
+        tweet: { example:[] },
+      }
+    }
+  })
+  @ApiNotFoundResponse({ description: 'NÃO EXECUTADO' })
   findAll() {
     return this.categoriaService.findAll();
   }
