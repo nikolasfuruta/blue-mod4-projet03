@@ -11,13 +11,14 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
-  .setTitle('Blue Projeto 02 Módulo 4')
-  .setDescription('API de controle dE Twitter')
+  .setTitle('Blue Projeto 03 Módulo 4')
+  .setDescription('API de controle de Twitter')
   .setVersion('1.0')
   .addTag('usuario')
   .addTag('tweet')
   .addTag('seguindo')
   .addTag('seguidores')
+  .addTag('categoria')
   .addTag('login')
   .build();
 const document = SwaggerModule.createDocument(app, config);
