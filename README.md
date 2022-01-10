@@ -222,7 +222,7 @@ Dentro desta rota é possível:
 ```
 - Apagar uma categoria utilizando o verbo [DELETE] e o [id] da categoria na rota (categoria/id).
 
-# AUTH(/auth)
+# LOGIN(/login)
 Dentro dessa rota é possível:
 - Requisitar um token utilizando o verbo [POST] e enviando os dados do usuário seguindo esse padrão em formato JSON:
 ```
