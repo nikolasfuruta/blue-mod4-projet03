@@ -3,7 +3,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards,  } from '
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('usuario')
@@ -31,7 +31,7 @@ export class UsuarioController {
     return this.usuarioService.create(createUsuarioDto);
   }
 
-  
+  @ApiBearerAuth('JWT-auth')
   @Get()
   @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'LISTA TODOS OS USUÁRIO' })
@@ -58,6 +58,7 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
+  @ApiBearerAuth('JWT-auth')
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @ApiOperation({ summary: 'EXIBE UM USUÁRIO ESPECÍFICO' })
@@ -85,6 +86,8 @@ export class UsuarioController {
     return this.usuarioService.findOne(+id);
   }
 
+  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('JWT-auth')
   @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @ApiOperation({ summary: 'ALTERA A PROPRIEDADE DO USUÁRIO' })
@@ -120,6 +123,7 @@ export class UsuarioController {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
+  @ApiBearerAuth('JWT-auth')
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({ summary: 'DELETA UM USUÁRIO' })
