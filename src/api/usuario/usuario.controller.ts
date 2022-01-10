@@ -17,7 +17,7 @@ export class UsuarioController {
     description: 'EXECUTADO COM SUCESSO',
     schema: {
       properties: {
-        nome: { example: "Nikolas" },
+        nome: { example: "nikolas" },
         senha: { example: "nikolas123" },
         imagem: { example: "nikolas.jpeg" },
         bio: { example: "estudante de backend" },

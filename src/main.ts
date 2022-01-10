@@ -10,7 +10,16 @@ async function bootstrap() {
   app.use(helmet()); //deixar este middleware em primeiro
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  const config = new DocumentBuilder()
+  const config = new DocumentBuilder().addBearerAuth(
+    {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      name: 'JWT',
+      description: 'Enter JWT token',
+      in: 'header',
+    },
+    'JWT-auth')
   .setTitle('Blue Projeto 03 Módulo 4')
   .setDescription('API de controle de Twitter')
   .setVersion('1.0')
@@ -21,6 +30,7 @@ async function bootstrap() {
   .addTag('categoria')
   .addTag('login')
   .build();
+  
 const document = SwaggerModule.createDocument(app, config);
 SwaggerModule.setup('api', app, document);
   await app.listen(process.env.PORT || 3000, () => {
