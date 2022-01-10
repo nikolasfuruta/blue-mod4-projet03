@@ -116,7 +116,8 @@ class CreateDto implements Prisma.[Tipo Prisma] {
 ## CRUD
 
 ### É importante notar que todas as rotas CRUD só podem ser realizadas se o usuário estiver autorizado, com exceção da criação do usuário.
-### O passo a passo de como fazer a autenticação será descrito mais adiante. 
+### O passo a passo de como fazer a autenticação será descrito mais adiante.
+### Todas as rotas a seguir podem ser testadas utilizando o SWAGGER através da rota (/api).
 
 # USUARIOS(/usuarios)
 Dentro desta rota é possível:
